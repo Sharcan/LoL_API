@@ -2,7 +2,13 @@
 node_modules/
 
 # Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
 # Optional eslint cache
 .eslintcache
