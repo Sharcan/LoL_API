@@ -1,4 +1,6 @@
+require('./config/config');
 require('./config/mongo');
+require('./config/passportConfig');
 
 // Initialisation du serveur
 const express = require('express');
@@ -11,21 +13,23 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser'); 
+const passport = require('passport');
 
 // Initialisation des routes
-var indexRouter = require('./routes/index');
+const accountRouter = require('./routes/account.routes');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+
+app.use('/api', accountRouter);
 
 // Appel des routes
-app.use('/', indexRouter)
-
 // Lancement du serveur
 server.listen(process.env.PORT || '3000', () => {
-    console.log('Server started at PORT 3000');
+    console.log('Server started at PORT ' + process.env.PORT);
 });
 
